@@ -1,0 +1,72 @@
+[
+  {
+    "path": "main.py",
+    "name": "main.py",
+    "suffix": ".py",
+    "size_bytes": 3112,
+    "modified": "2026-06-04 23:40:40.286329"
+  },
+  {
+    "path": "__pycache__\\analyzer.cpython-310.pyc",
+    "name": "analyzer.cpython-310.pyc",
+    "suffix": ".pyc",
+    "size_bytes": 2825,
+    "modified": "2026-06-04 23:36:13.498723"
+  },
+  {
+    "path": "analyzer.py",
+    "name": "analyzer.py",
+    "suffix": ".py",
+    "size_bytes": 2119,
+    "modified": "2026-06-05 00:09:09.826427"
+  },
+  {
+    "path": "duplicates.py",
+    "name": "duplicates.py",
+    "suffix": ".py",
+    "size_bytes": 1209,
+    "modified": "2026-06-05 13:29:49.151805"
+  },
+  {
+    "path": "__pycache__\\scanner.cpython-310.pyc",
+    "name": "scanner.cpython-310.pyc",
+    "suffix": ".pyc",
+    "size_bytes": 1145,
+    "modified": "2026-06-04 22:13:01.937734"
+  },
+  {
+    "path": "scanner.py",
+    "name": "scanner.py",
+    "suffix": ".py",
+    "size_bytes": 1043,
+    "modified": "2026-06-04 22:04:26.410886"
+  },
+  {
+    "path": "exporter.py",
+    "name": "exporter.py",
+    "suffix": ".py",
+    "size_bytes": 821,
+    "modified": "2026-06-05 13:46:01.017351"
+  },
+  {
+    "path": "results.csv",
+    "name": "results.csv",
+    "suffix": ".csv",
+    "size_bytes": 653,
+    "modified": "2026-06-05 13:39:10.942874"
+  },
+  {
+    "path": "result.json",
+    "name": "result.json",
+    "suffix": ".json",
+    "size_bytes": 0,
+    "modified": "2026-06-05 13:39:10.942874"
+  },
+  {
+    "path": "treeview.py",
+    "name": "treeview.py",
+    "suffix": ".py",
+    "size_bytes": 0,
+    "modified": "2026-06-04 21:42:07.839077"
+  }
+]

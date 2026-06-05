@@ -1,0 +1,11 @@
+name,suffix,size_bytes,path,modified
+main.py,.py,3112,main.py,2026-06-04 23:40:40.286329
+analyzer.cpython-310.pyc,.pyc,2825,__pycache__\analyzer.cpython-310.pyc,2026-06-04 23:36:13.498723
+analyzer.py,.py,2119,analyzer.py,2026-06-05 00:09:09.826427
+duplicates.py,.py,1209,duplicates.py,2026-06-05 13:29:49.151805
+scanner.cpython-310.pyc,.pyc,1145,__pycache__\scanner.cpython-310.pyc,2026-06-04 22:13:01.937734
+scanner.py,.py,1043,scanner.py,2026-06-04 22:04:26.410886
+exporter.py,.py,821,exporter.py,2026-06-05 13:46:01.017351
+results.csv,.csv,653,results.csv,2026-06-05 13:39:10.942874
+result.json,.json,0,result.json,2026-06-05 13:39:10.942874
+treeview.py,.py,0,treeview.py,2026-06-04 21:42:07.839077
