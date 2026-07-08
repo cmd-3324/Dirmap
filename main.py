@@ -50,7 +50,7 @@ class Menu(ABC):
 class BoxMenu(Menu):
     WIDTH = 44
     def _line(self, char="═", corners=("╔","╗","╝","╚")):
-            return f"{corners[0]}{char * self.WIDTH}{corners[1]}"
+            return f"{corners[0]}{char * self.WIDTH}{corners[1]}" # does not print str alone - interactive func
     
     def render(self):
         print(self._line())
@@ -128,7 +128,7 @@ def main():
     menu.add_item("3", "Find Duplicates", action_duplicates)
     menu.add_item("4", "Export Report", action_export)
     menu.add_item("5", "Show Tree", action_tree)
-    menu.add_item("5", "Exit", action_exit)
+    menu.add_item("6", "Exit", action_exit)
     
     app = App()
     app.register_menu(menu)
