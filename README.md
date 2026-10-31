@@ -13,6 +13,7 @@ A small, dependency-free **Python command-line tool** that scans, analyzes, and 
 | **Tree visualization** | Displays the folder structure as an ASCII tree |
 | **Data export** | Exports scan results to CSV and JSON |
 | **Interactive menu** | Box-drawing character interface — no arguments needed |
+| **Graceful errors** | Unreadable files are skipped, and problems are reported without crashing |
 
 ## Requirements
 
@@ -24,7 +25,7 @@ A small, dependency-free **Python command-line tool** that scans, analyzes, and 
 Clone the repository and install it with [uv](https://docs.astral.sh/uv/):
 
 ```bash
-git clone <repo-url>
+gh repo clone cmd-3324/Dirmap
 cd Dirmap
 uv sync
 ```
@@ -32,7 +33,7 @@ uv sync
 Or with `pip`:
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/cmd-3324/Dirmap.git
 cd Dirmap
 pip install .
 ```
@@ -44,7 +45,7 @@ Run the interactive menu:
 ```bash
 uv run dirmap      # with uv
 dirmap             # after pip install
-python -m dirmap   # run as a module from the project root
+python -m dirmap   # after install (or with src/ on PYTHONPATH)
 ```
 
 From the menu:
@@ -56,7 +57,8 @@ From the menu:
 | `3` | Find duplicate files by name and size |
 | `4` | Export the scan to `output/results.csv` and `output/result.json` |
 | `5` | Print the folder tree (configurable max depth) |
-| `6` | Exit |
+| `6` | List empty folders |
+| `7` | Exit |
 
 Pressing Enter without a path uses the current directory (`.`). Export paths can be overridden when calling `export_csv()` / `export_json()` directly.
 
@@ -66,10 +68,13 @@ Pressing Enter without a path uses the current directory (`.`). Export paths can
 Dirmap/
 ├── pyproject.toml
 ├── README.md
+├── LICENSE
 ├── output/                  # Generated scan reports (gitignored)
+├── tests/                   # pytest suite
 └── src/dirmap/
     ├── __init__.py
     ├── __main__.py          # `python -m dirmap`
+    ├── errors.py            # Exception hierarchy (DirmapError, ScanError, ExportError)
     ├── core/                # Scanning and analysis
     │   ├── scanner.py       # Recursive file scanning
     │   ├── analyzer.py      # Statistics: types, sizes, age, empty folders
@@ -85,11 +90,16 @@ Dirmap/
 
 ## Development
 
-Install the project in editable mode with its development environment:
+Install the project and its development dependencies:
 
 ```bash
 uv sync
-uv run dirmap
+```
+
+Run the test suite:
+
+```bash
+uv run pytest
 ```
 
 The package uses the `src/` layout, so imports are always absolute, e.g.:
@@ -97,6 +107,25 @@ The package uses the `src/` layout, so imports are always absolute, e.g.:
 ```python
 from dirmap.core.scanner import scan_directory
 ```
+
+### Error handling
+
+Library-style callers can catch the shared base class:
+
+```python
+from dirmap.errors import DirmapError
+
+try:
+    files = scan_directory("some/folder")
+except DirmapError as exc:
+    print(f"Could not scan: {exc}")
+```
+
+`scan_directory()` and `empty_folders()` also accept an `on_error` callback to observe files or folders that cannot be read.
+
+## License
+
+Released under the [MIT License](LICENSE).
 
 ## Who is this for?
 

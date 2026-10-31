@@ -11,6 +11,11 @@ __pycache__/
 .ruff_cache/
 .mypy_cache/
 
+# Test / coverage artifacts
+.coverage
+.coverage.*
+htmlcov/
+
 # Build artifacts
 build/
 dist/

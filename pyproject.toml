@@ -1,16 +1,29 @@
 [project]
 name = "dirmap"
 version = "0.1.0"
-description = "Add your description here"
+description = "A dependency-free command-line directory analyzer: scan, analyze, find duplicates, visualize, and export folder contents."
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [
     { name = "Max Miller", email = "ali.alipour4576@gmail.com" }
 ]
 requires-python = ">=3.13"
 dependencies = []
 
+[project.urls]
+Homepage = "https://github.com/cmd-3324/Dirmap"
+Repository = "https://github.com/cmd-3324/Dirmap"
+
 [project.scripts]
 dirmap = "dirmap.cli.main:main"
+
+[dependency-groups]
+dev = ["pytest>=8.0"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
 
 [build-system]
 requires = ["uv_build>=0.12.22,<0.13.0"]

@@ -1,33 +1,53 @@
+"""Duplicate file detection."""
+
 from collections import defaultdict
-from pathlib import Path
-from dirmap.core.scanner import scan_directory
+from typing import Callable, Hashable
 
-def duplicates_by_name(files) -> list[dict]:
+
+def _group_by(files, key: Callable[[dict], Hashable]) -> dict:
+    """Group non-empty files by ``key`` and keep only groups with 2+ paths."""
+    groups: dict = defaultdict(list)
+    for file in files:
+        if file["size_bytes"] > 0:
+            groups[key(file)].append(file["path"])
+    return {value: paths for value, paths in groups.items() if len(paths) > 1}
+
+
+def _report(groups: dict, empty_message: str) -> None:
+    print(f"\n  Duplicate Files \t ")
+    print("-" * 44)
+    if not groups:
+        print(empty_message)
+        return
+    for value, paths in groups.items():
+        print(f"{value} \t {paths}")
+
+
+def duplicates_by_name(files) -> dict[str, list[str]]:
+    """Return duplicate groups keyed by file name.
+
+    An empty ``files`` list is not an error: a message is printed and an empty
+    mapping is returned.
+    """
     if not files:
-        raise Exception("No File Found")
-    groups = defaultdict(list) #create a dic where missing keys get empty values
-    for f in files:
-        if f["size_bytes"] > 0: 
-            groups[f["name"]].append(f["path"])
-    dupes = {name: paths for name, paths in groups.items() if len(paths) > 1}
-    print(f"\n  Duplicate Files \t ")
-    print("-" * 44)
-    if not dupes:
-        print("No Duplicate Files(by name)")
-    else:
-        for i, j in dupes.items():
-            print(f"{i} \t {j}")
+        print("\n  No files to analyze.")
+        return {}
 
-def duplicates_by_size(files) -> list[dict]:
-    groups = defaultdict(list)
-    for f in files:
-        if f["size_bytes"] > 0: 
-            groups[f["size_bytes"]].append(f["path"])
-    dupes = {size: paths for size, paths in groups.items() if len(paths) > 1}
-    print(f"\n  Duplicate Files \t ")
-    print("-" * 44)
-    if not dupes:
-        print("No Duplicate Files(by size)")
-    else:
-        for i, j in dupes.items():
-            print(f"{i} KiloBytes \t {j}")
+    groups = _group_by(files, lambda file: file["name"])
+    _report(groups, "No Duplicate Files(by name)")
+    return groups
+
+
+def duplicates_by_size(files) -> dict[int, list[str]]:
+    """Return duplicate groups keyed by size in bytes.
+
+    An empty ``files`` list is not an error: a message is printed and an empty
+    mapping is returned.
+    """
+    if not files:
+        print("\n  No files to analyze.")
+        return {}
+
+    groups = _group_by(files, lambda file: file["size_bytes"])
+    _report(groups, "No Duplicate Files(by size)")
+    return groups
