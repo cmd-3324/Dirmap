@@ -1,6 +1,6 @@
 from collections import defaultdict
 from pathlib import Path
-from scanner import scan_directory
+from dirmap.core.scanner import scan_directory
 
 def duplicates_by_name(files) -> list[dict]:
     if not files:

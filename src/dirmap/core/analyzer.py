@@ -1,6 +1,6 @@
 from collections import Counter
 from pathlib import Path
-from scanner import scan_directory
+from dirmap.core.scanner import scan_directory
 #fff
 def count_by_type(files):
     s = Counter(f["suffix"] for f in files)
